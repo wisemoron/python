@@ -1,49 +1,97 @@
 import sys
-
+import colorama, random
+space_positions = []
 letter = []
 used_letter = []
 numtries = 0
 letters_found = 0
 ip_letter = ""
-wordlist = ["starscream", "megatron"]
+wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot", "Theobroma", "Sahakari Bhandar", "Cafe Royal",
+            "Trattoria", "Strand Book Depot", "Colaba Market", "Radio Club", "Electric House", "Regal Cinema", "Bade Miyan",
+            "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
+            "Sasoon Dock", "Cafe Mondegar", "Cafe Leopold", "Tetsuma", "Bayview Cafe"]
+
+colorama.init()
+def layout_settings():
+#    sys.stderr.write('\x1b[2J\x1b[H')
+    print(chr(27) + "[2J")
+    sys.stdout.write('\n' * 15)
+    sys.stdout.write('\t' * 4)
+
+    return
+
+def choose_word(wordlist):
+    index = random.randint(0, len(wordlist) - 1)
+    return index
 
 
-def lay_board(wordlist):
-    for dash in range(len(wordlist[0])):
-        sys.stdout.write('__ ')
+def lay_board(word):
+    counter = 0
+    layout_settings()
+    sys.stdout.write("\n\n\t\t\t\tTries: " + str(numtries) + "\n\n\t\t\t\t")
+    for pos in range(len(word)):
+        if word.find(' ', pos) == pos:
+            space_positions.append(pos)
+
+    for dash in range(len(word)):
+        if len(space_positions) > 0 and dash == space_positions[counter]:
+            sys.stdout.write('   ')
+            if counter + 1 < len(space_positions):
+                counter = counter + 1
+        else:
+            sys.stdout.write('__ ')
     return
 
 
 def accept_input(letter, ip_letter, used_letter):
-    print("")
-    ip_letter = input()
-    if ip_letter not in letter:
-        letter.append(ip_letter)
-    return ip_letter
+    ip_letter = input("\n\t\t\t\tGo on. Take a guess, loser: ")
+    if ip_letter[0] not in letter:
+        letter.append(ip_letter[0])
+    return ip_letter[0]
 
 
-def find_letter_in_word(wordlist, letter, letters_found, ip_letter, numtries):
-    for pos, char in enumerate(wordlist[0]):
-        if char in letter:
-            sys.stdout.write(char.upper() + ' ')
-            if char == ip_letter:
+def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
+    counter = 0
+    found_letter = 0
+    layout_settings()
+#    sys.stdout.write("\n\n\t\t\t\tTries: " + str(numtries) + "\n\n\t\t\t\t")
+    for pos, char in enumerate(word):
+        if char.lower() in letter or char in letter:
+            sys.stdout.write(char.upper() + '  ')
+            if (char.lower() == ip_letter[0] or char == ip_letter[0])\
+                    and (ip_letter[0] not in used_letter):
                 letters_found = letters_found + 1
-                if numtries >= 0:
-                    numtries = numtries - 1
+                found_letter = 1
         else:
-            sys.stdout.write('__ ')
+            if len(space_positions) > 0 and pos == space_positions[counter]:
+                sys.stdout.write('   ')
+                if counter + 1 < len(space_positions):
+                    counter = counter + 1
+            else:
+                sys.stdout.write('__ ')
+
+    if numtries >= 0 and found_letter == 1:
+        numtries = numtries - 1
     return letters_found, numtries
 
+word = wordlist[choose_word(wordlist)]
 
-lay_board(wordlist)
-print(len(wordlist[0]))
-while letters_found < len(wordlist[0]) and numtries < 10:
+lay_board(word)
+#print("\n\n\t\t\t\tTries: ", numtries)
+#print(len(word))
+while letters_found < (len(word) - len(space_positions)) and numtries < 10:
     ip_letter = accept_input(letter, ip_letter, used_letter)
-    if ip_letter in used_letter:
-        print("Letter used. Guess another .. ")
+    if ip_letter[0] in used_letter:
+        letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
+#        print("\n\n\t\t\t\tTries: ", numtries)
+#        print("\n\n\t\t\t\tletters_found: ", letters_found)
+        print("\n\n\t\t\t\tLetter used. Guess another .. ")
         continue
     else:
-        used_letter.append(ip_letter)
-    letters_found, numtries = find_letter_in_word(wordlist, letter, letters_found, ip_letter, numtries)
-    numtries = numtries + 1
-    print("tries: ", numtries)
+        letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
+        numtries = numtries + 1
+        used_letter.append(ip_letter[0])
+        print("\n\n\t\t\t\tTries: ", numtries)
+#        print("\n\n\t\t\t\tletters_found: ", letters_found)
+#        print("\n\n\t\t\t\tspace_positions: ", len(space_positions))
+#print("\t\t\t\tExit")
