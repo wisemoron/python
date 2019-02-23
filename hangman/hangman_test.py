@@ -1,8 +1,3 @@
-Information
-Classification: ll
-Limited
-Access
-
 import sys
 
 letter = []
