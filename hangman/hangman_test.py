@@ -1,11 +1,7 @@
 import sys
 import colorama, random
-space_positions = []
-letter = []
-used_letter = []
-numtries = 0
-letters_found = 0
-ip_letter = ""
+keep_playing = 'Y'
+
 wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot", "Theobroma", "Sahakari Bhandar", "Cafe Royal",
             "Trattoria", "Strand Book Depot", "Colaba Market", "Radio Club", "Electric House", "Regal Cinema", "Bade Miyan",
             "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
@@ -74,24 +70,38 @@ def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
         numtries = numtries - 1
     return letters_found, numtries
 
-word = wordlist[choose_word(wordlist)]
 
-lay_board(word)
+while keep_playing == "Y":
+    word = wordlist[choose_word(wordlist)]
+    space_positions = []
+    letter = []
+    used_letter = []
+    numtries = 0
+    letters_found = 0
+    ip_letter = ""
+    lay_board(word)
 #print("\n\n\t\t\t\tTries: ", numtries)
 #print(len(word))
-while letters_found < (len(word) - len(space_positions)) and numtries < 10:
-    ip_letter = accept_input(letter, ip_letter, used_letter)
-    if ip_letter[0] in used_letter:
-        letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
-#        print("\n\n\t\t\t\tTries: ", numtries)
-#        print("\n\n\t\t\t\tletters_found: ", letters_found)
-        print("\n\n\t\t\t\tLetter used. Guess another .. ")
-        continue
-    else:
-        letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
-        numtries = numtries + 1
-        used_letter.append(ip_letter[0])
-        print("\n\n\t\t\t\tTries: ", numtries)
-#        print("\n\n\t\t\t\tletters_found: ", letters_found)
-#        print("\n\n\t\t\t\tspace_positions: ", len(space_positions))
-#print("\t\t\t\tExit")
+
+    while letters_found < (len(word) - len(space_positions)) and numtries < 10:
+        ip_letter = accept_input(letter, ip_letter, used_letter)
+        if ip_letter[0] in used_letter:
+            letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
+    #        print("\n\n\t\t\t\tTries: ", numtries)
+    #        print("\n\n\t\t\t\tletters_found: ", letters_found)
+            print("\n\n\t\t\t\tLetter used. Guess another .. ")
+            continue
+        else:
+            letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
+            numtries = numtries + 1
+            used_letter.append(ip_letter[0])
+            print("\n\n\t\t\t\tTries: ", numtries)
+    #        print("\n\n\t\t\t\tletters_found: ", letters_found)
+    #        print("\n\n\t\t\t\tspace_positions: ", len(space_positions))
+    if numtries == 10:
+        print("\n\t\t\t\tYou're pathetic. The answer is: ", word)
+    elif letters_found == (len(word) - len(space_positions)) and numtries < 10:
+        print("\n\t\t\t\tAll right, I get it. You 'know' Colaba :/")
+
+
+    keep_playing = input("\n\t\t\t\tAnother one? ").upper()
