@@ -44,7 +44,7 @@ def lay_board(word):
 
 
 def accept_input(letter, ip_letter, used_letter):
-    ip_letter = input("\n\t\t\t\tGo on. Take a guess, loser: ")
+    ip_letter = input("\n\t\t\t\tGo on. Take a guess: ")
     if ip_letter[0] not in letter:
         letter.append(ip_letter[0])
     return ip_letter[0]
