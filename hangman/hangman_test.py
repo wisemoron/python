@@ -7,17 +7,33 @@ wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot"
             "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
             "Sasoon Dock", "Cafe Mondegar", "Cafe Leopold", "Tetsuma", "Bayview Cafe"]
 
+losing_taunts = ["Shame on you. Seriously.", "LOOOOSEERRR!", "Hey outsider who's never lived in Colaba - ", "WOW. You know NOTHING.",
+                 "Sheeesh, how are you still alive? ", "Wrong Hangman game. You need the Iceland version. Fewer places."]
+
+winning_taunts = ["Fine. You did it. Bleh.", "So you lived in Colaba. You knew the answer. Big deal!", "CLAP ... CLAP.. CL..AP",
+                  "Check out the big brains, eh? Quick what's the root of 349 .. ", "Okay, well done. *yawn*",
+                  "NOICE! What .. you expecting a reward or something now?"]
 colorama.init()
 def layout_settings():
 #    sys.stderr.write('\x1b[2J\x1b[H')
     print(chr(27) + "[2J")
-    sys.stdout.write('\n' * 15)
+    sys.stdout.write('\n' * 11)
+    print("\t\t\t\t H A N G M A N: The Colaba Edition")
+    print("\t\t\t\t==================================\n\n")
     sys.stdout.write('\t' * 4)
 
     return
 
 def choose_word(wordlist):
     index = random.randint(0, len(wordlist) - 1)
+    return index
+
+def choose_losing_taunt(losing_taunts):
+    index = random.randint(0, len(losing_taunts) - 1)
+    return index
+
+def choose_winning_taunt(winning_taunts):
+    index = random.randint(0, len(winning_taunts) - 1)
     return index
 
 
@@ -96,11 +112,11 @@ while keep_playing == "Y":
             numtries = numtries + 1
             used_letter.append(ip_letter[0])
             print("\n\n\t\t\t\tTries: ", numtries)
-            
+
     if numtries == 10:
-        print("\n\t\t\t\tYou're pathetic. The answer is: ", word)
+        print("\n\t\t\t\t" + losing_taunts[choose_losing_taunt(losing_taunts)] + " The answer is: ", word)
     elif letters_found == (len(word) - len(space_positions)) and numtries < 10:
-        print("\n\t\t\t\tAll right, I get it. You 'know' Colaba :/")
+        print("\n\t\t\t\t", winning_taunts[choose_winning_taunt(winning_taunts)])
 
 
     keep_playing = input("\n\t\t\t\tAnother one? ").upper()
