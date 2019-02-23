@@ -96,8 +96,7 @@ while keep_playing == "Y":
             numtries = numtries + 1
             used_letter.append(ip_letter[0])
             print("\n\n\t\t\t\tTries: ", numtries)
-    #        print("\n\n\t\t\t\tletters_found: ", letters_found)
-    #        print("\n\n\t\t\t\tspace_positions: ", len(space_positions))
+            
     if numtries == 10:
         print("\n\t\t\t\tYou're pathetic. The answer is: ", word)
     elif letters_found == (len(word) - len(space_positions)) and numtries < 10:
