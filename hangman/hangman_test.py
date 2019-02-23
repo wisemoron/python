@@ -66,7 +66,6 @@ def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
     counter = 0
     found_letter = 0
     layout_settings()
-#    sys.stdout.write("\n\n\t\t\t\tTries: " + str(numtries) + "\n\n\t\t\t\t")
     for pos, char in enumerate(word):
         if char.lower() in letter or char in letter:
             sys.stdout.write(char.upper() + '  ')
@@ -96,15 +95,11 @@ while keep_playing == "Y":
     letters_found = 0
     ip_letter = ""
     lay_board(word)
-#print("\n\n\t\t\t\tTries: ", numtries)
-#print(len(word))
 
     while letters_found < (len(word) - len(space_positions)) and numtries < 10:
         ip_letter = accept_input(letter, ip_letter, used_letter)
         if ip_letter[0] in used_letter:
             letters_found, numtries = find_letter_in_word(word, letter, letters_found, ip_letter[0], numtries)
-    #        print("\n\n\t\t\t\tTries: ", numtries)
-    #        print("\n\n\t\t\t\tletters_found: ", letters_found)
             print("\n\n\t\t\t\tLetter used. Guess another .. ")
             continue
         else:
