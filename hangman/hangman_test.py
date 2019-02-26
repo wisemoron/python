@@ -10,18 +10,22 @@ wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot"
             "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
             "Sasoon Dock", "Cafe Mondegar", "Cafe Leopold", "Tetsuma", "Bayview Cafe"]
 
-losing_taunts = ["Shame on you. Seriously.", "LOOOOSEERRR!", "Hey outsider who's never lived in Colaba - ", "WOW. You know NOTHING.",
-                 "Sheeesh, how are you still alive? ", "Wrong Hangman game. You need the Iceland version. Fewer places."]
+losing_taunts = ["Shame on you. Seriously.", "LOOOOSEERRR!", "Hey outsider who's never lived in Bombay - ", "WOW. You know NOTHING.",
+                 "Sheeesh, how are you still alive?", "Wrong Hangman game. You need the Iceland version. Fewer places.",
+                 "Such a kid. Go home and sleep.", "Beta .. tumse na ho paayega.", "Makes you wonder, doesn't it? Who are these people who think you're intelligent?",
+                 "Yeah, you're not beating this. FOR SURE.", "Quit while this is not yet embarrassing. I mean it.", "All you need now is a noose. Let the Hangman do the rest.",
+                 "Man.. yo daddy so dumb, he got hit by a parked car."]
 
-winning_taunts = ["Fine. You did it. Bleh.", "So you lived in Colaba. You knew the answer. Big deal!", "CLAP ... CLAP.. CL..AP",
+winning_taunts = ["Fine. You did it. Bleh.", "So you lived in South Bombay. You knew the answer. Big deal!", "CLAP ... CLAP.. CL..AP",
                   "Check out the big brains, eh? Quick what's the root of 349 .. ", "Okay, well done. *yawn*",
-                  "NOICE! What .. you expecting a reward or something now?"]
+                  "NOICE! What .. you expecting a reward or something now?", "Aww, isn't that adorable? You got one.", "You know you can't keep up this winning streak, yeah?",
+                  ]
 colorama.init()
 def layout_settings():
 #    sys.stderr.write('\x1b[2J\x1b[H')
     print(chr(27) + "[2J")
     sys.stdout.write('\n' * 11)
-    print("\t\t\t\t H A N G M A N: The Colaba Edition")
+    print("\t\t\t\t H A N G M A N: The South Bombay Edition")
     print("\t\t\t\t==================================\n\n")
     sys.stdout.write('\t' * 4)
 

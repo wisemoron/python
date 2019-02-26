@@ -40,6 +40,7 @@ Fashion Street
 Colaba Causeway
 Cheetah Gate
 Lion Gate
+Olympia Coffee House
 Rhythm House
 The Army Restaurant
 Bhulabhai Desai Road
@@ -68,3 +69,24 @@ The Alexandra Girls English Institution
 Azad Maidan
 Kalbadevi
 Warden Road
+Piccadilly
+Jimmy Boy
+Cafe Universal
+Food Inn
+Mohammad Ali Road
+Shalimar Restaurant
+Crawford Market
+Manish Market
+Victoria Terminus
+Bombay Central
+Sukh Sagar
+Malabar Hill
+Kamala Nehru Park
+Haji Ali Dargah
+Mount Mary Church
+Carter Road
+Madame Cama Road
+Maratha Mandir
+Royal Bombay Yacht Club
+Ballard Pier
+Parsi Gymkhana
