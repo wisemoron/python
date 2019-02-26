@@ -26,7 +26,7 @@ def layout_settings():
     print(chr(27) + "[2J")
     sys.stdout.write('\n' * 11)
     print("\t\t\t\t H A N G M A N: The South Bombay Edition")
-    print("\t\t\t\t==================================\n\n")
+    print("\t\t\t\t=========================================\n\n")
     sys.stdout.write('\t' * 4)
 
     return
