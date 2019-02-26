@@ -1,14 +1,10 @@
 import sys
 import colorama, random
-import csv
 import urllib.request
-
-import base64
-import requests
-
 keep_playing = 'Y'
 
-test_list = []
+word_used = []
+wordlist2 = []
 wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot", "Theobroma", "Sahakari Bhandar", "Cafe Royal",
             "Trattoria", "Strand Book Depot", "Colaba Market", "Radio Club", "Electric House", "Regal Cinema", "Bade Miyan",
             "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
@@ -31,8 +27,17 @@ def layout_settings():
 
     return
 
-def choose_word(wordlist):
-    index = random.randint(0, len(wordlist) - 1)
+def choose_word(wordlist, word_used):
+    index = -1
+    while index not in word_used:
+        if len(wordlist) == len(word_used):
+            index = -1
+            break
+        index = random.randint(0, len(wordlist) - 1)
+        if index in word_used:
+            index = -1
+            continue
+        word_used.append(index)
     return index
 
 def choose_losing_taunt(losing_taunts):
@@ -92,34 +97,23 @@ def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
         numtries = numtries - 1
     return letters_found, numtries
 
-
-url = 'https://api.github.com/repos/wisemoron/python/contents/dev1.0/hangman/test_wordlist.txt'
-req = requests.get(url)
-if req.status_code == requests.codes.ok:
-    req = req.json()  # the response is a JSON
-    # req is now a dict with keys: name, encoding, url, size ...
-    # and content. But it is encoded with base64.
-    content = base64.decodebytes(req['content'])
-else:
-    print('Content was not found.')
-
-'''
-with urllib.request.urlopen("https://github.com/wisemoron/python/blob/python/dev1.0/hangman/test_wordlist.txt") as url:
-    try:
-        templist = str(url.read())
-        templist2 = templist.replace('\\n', ' ')
-        print(templist2)
-        test_list = [row for row in templist2.split(' ')]
-        print(test_list)
-
-    except:
-        print("Could not open URL.")
+def populate_wordlist_from_url(wordlist, listurl):
+    with urllib.request.urlopen(listurl) as url:
+        for line in url:
+            line_words = line.decode('utf-8').split('\\n') # handles the b' at the beginning
+            for word in line_words:
+                wordlist.append(word.replace('\n', ''))
+    return
 
 
-
+populate_wordlist_from_url(wordlist2, "https://raw.githubusercontent.com/wisemoron/python/master/hangman/test_wordlist.txt")
 
 while keep_playing == "Y":
-    word = wordlist[choose_word(wordlist)]
+    index = choose_word(wordlist2, word_used)
+    if index == -1:
+        print("\n\n\t\t\t\tAll words attempted!")
+        break
+    word = wordlist2[index]
     space_positions = []
     letter = []
     used_letter = []
@@ -147,4 +141,3 @@ while keep_playing == "Y":
 
 
     keep_playing = input("\n\t\t\t\tAnother one? ").upper()
-'''

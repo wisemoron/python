@@ -1,5 +1,70 @@
-Metro
-Empire
-Roxy
-Lotus
+Metro Cinema
+Excelsior Cinema
+Roxy Cinema
+Lotus Cinema
 Opera House
+Mansoor Bhai
+Girdhar Niwas
+Rashid Wadia
+Janata Book Depot
+Theobroma
+Sahakari Bhandar
+Cafe Royal
+Trattoria
+Strand Book Depot
+Colaba Market
+Radio Club
+Electric House
+Regal Cinema
+Bade Miyan
+Gateway of India
+Apollo Bunder
+The Scholar High School
+Campion
+Madras Cafe
+Kailash Parbat
+St Annes High School
+Navy Nagar
+Sasoon Dock
+Cafe Mondegar
+Cafe Leopold
+Tetsuma
+Bayview Cafe
+Marine Drive
+Nariman Point
+Cuffe Parade
+Girgaum Chowpatty
+Jazz By The Bay
+Churchgate
+Fashion Street
+Colaba Causeway
+Cheetah Gate
+Lion Gate
+Rhythm House
+The Army Restaurant
+Bhulabhai Desai Road
+Mahalaxmi Temple
+Babulnath Temple
+Teen Batti
+Priyadarshini Park
+Altamount Road
+Peddar Road
+Hughes Road
+Hassaram Rijhumal College
+Jai Hind College
+Kishinchand Chellaram College
+Wilson College
+St Xaviers
+Dockyard Road
+Wankhede Stadium
+Brabourne Stadium
+Villa Theresa High School
+J B Petit High School
+Eros Cinema
+Snowmans
+Right Place
+Worli Seaface
+The Alexandra Girls English Institution
+Azad Maidan
+Kalbadevi
+Warden Road
