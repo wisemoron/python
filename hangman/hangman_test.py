@@ -1,7 +1,14 @@
 import sys
 import colorama, random
+import csv
+import urllib.request
+
+import base64
+import requests
+
 keep_playing = 'Y'
 
+test_list = []
 wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot", "Theobroma", "Sahakari Bhandar", "Cafe Royal",
             "Trattoria", "Strand Book Depot", "Colaba Market", "Radio Club", "Electric House", "Regal Cinema", "Bade Miyan",
             "Gateway of India", "Apollo Bunder", "The Scholar High School", "Campion", "Madras Cafe", "Kailash Parbat", "Navy Nagar",
@@ -86,6 +93,31 @@ def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
     return letters_found, numtries
 
 
+url = 'https://api.github.com/repos/wisemoron/python/contents/dev1.0/hangman/test_wordlist.txt'
+req = requests.get(url)
+if req.status_code == requests.codes.ok:
+    req = req.json()  # the response is a JSON
+    # req is now a dict with keys: name, encoding, url, size ...
+    # and content. But it is encoded with base64.
+    content = base64.decodebytes(req['content'])
+else:
+    print('Content was not found.')
+
+'''
+with urllib.request.urlopen("https://github.com/wisemoron/python/blob/python/dev1.0/hangman/test_wordlist.txt") as url:
+    try:
+        templist = str(url.read())
+        templist2 = templist.replace('\\n', ' ')
+        print(templist2)
+        test_list = [row for row in templist2.split(' ')]
+        print(test_list)
+
+    except:
+        print("Could not open URL.")
+
+
+
+
 while keep_playing == "Y":
     word = wordlist[choose_word(wordlist)]
     space_positions = []
@@ -115,3 +147,4 @@ while keep_playing == "Y":
 
 
     keep_playing = input("\n\t\t\t\tAnother one? ").upper()
+'''
