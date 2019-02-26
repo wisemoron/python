@@ -1,9 +1,11 @@
 import sys
 import colorama, random
 import urllib.request
+from urllib.error import URLError, HTTPError
 keep_playing = 'Y'
 
 word_used = []
+game_wordlist = []
 wordlist2 = []
 wordlist = ["Mansoor Bhai", "Girdhar Niwas", "Rashid Wadia", "Janata Book Depot", "Theobroma", "Sahakari Bhandar", "Cafe Royal",
             "Trattoria", "Strand Book Depot", "Colaba Market", "Radio Club", "Electric House", "Regal Cinema", "Bade Miyan",
@@ -100,7 +102,7 @@ def find_letter_in_word(word, letter, letters_found, ip_letter, numtries):
     if numtries >= 0 and found_letter == 1:
         numtries = numtries - 1
     return letters_found, numtries
-
+'''
 def populate_wordlist_from_url(wordlist, listurl):
     with urllib.request.urlopen(listurl) as url:
         for line in url:
@@ -108,16 +110,37 @@ def populate_wordlist_from_url(wordlist, listurl):
             for word in line_words:
                 wordlist.append(word.replace('\n', ''))
     return
+'''
+def populate_wordlist_from_url(wordlist, listurl):
+    return_code = 0
+    try:
+        url = urllib.request.urlopen(listurl)
+        for line in url:
+            line_words = line.decode('utf-8').split('\\n')  # handles the b' at the beginning
+            for word in line_words:
+                wordlist.append(word.replace('\n', ''))
+    except HTTPError as e:
+        print("HTTP error: ", e.code)
+        return_code = 1
+    except URLError as e:
+        print("URL error: ", e.reason)
+        return_code = 1
 
+    return return_code
 
-populate_wordlist_from_url(wordlist2, "https://raw.githubusercontent.com/wisemoron/python/master/hangman/test_wordlist.txt")
+return_code = populate_wordlist_from_url(wordlist2, "https://raw.githubusercontent.com/wisemoron/python/master/hangman/test_wordlist.txt")
+
+if return_code == 1:
+    game_wordlist = wordlist
+else:
+    game_wordlist = wordlist2
 
 while keep_playing == "Y":
-    index = choose_word(wordlist2, word_used)
+    index = choose_word(game_wordlist, word_used)
     if index == -1:
         print("\n\n\t\t\t\tAll words attempted!")
         break
-    word = wordlist2[index]
+    word = game_wordlist[index]
     space_positions = []
     letter = []
     used_letter = []
